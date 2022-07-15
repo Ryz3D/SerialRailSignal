@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Arduino.h>
+#include "settings.h"
 
-#define SIGNAL_DEBUG 1
 #define OFF 255
 
 class Signal
