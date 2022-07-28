@@ -9,7 +9,7 @@
 // wenn die telegramm-werte zu dumm sind:
 // uint8_t tele_dcc_matrix[] = {0, 3, 1};
 // sodass set() die neuen sinnvollen werte kriegt
-// p_kl == p_zs1_0 ?
+// debug info serial.print (addressbereiche, signal-#, info-pdf)
 // neue signale mit ws2811 auf pcb? -> signals[] = {new Vr(), new Hp(),new Hp()} ws- & dcc- (addr-offset) addressierung nach index
 // https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_Worldsemi-WS2812B-Mini_C527089.html
 // -> dimmbar (glühbirnen-nachglühen simulieren), alle farben & kombinationen
@@ -17,7 +17,7 @@
 // -> einfachere ansteuerung
 // -> passend auf 3d-signalschirm
 // -> ohne signalschirm nutzbar mit schwarzem pcb und komponenten auf rückseite
-// -> denk an die schraubenlöcher!
+// -> denk an die schraubenlöcher! (genug abstand zum aufbohren)
 
 // WICHTIG: lass mal den ganzen arduinos namen geben (albert, berta, cedric, dominik, eugen...)
 
@@ -33,6 +33,7 @@ uint8_t signals_len = sizeof(signals) / sizeof(Signal *);
 void setup()
 {
   Serial.begin(9600);
+  Serial.setTimeout(5000);
 
   setupSignals();
   for (uint8_t i = 0; i < signals_len; i++)
@@ -121,8 +122,15 @@ void loop()
     }
     else if (c == 'p') // Pin control
     {
+      while (!Serial.available())
+        ;
       bool state = Serial.read() == '1';
-      uint8_t pin = Serial.parseInt();
+
+      while (!Serial.available())
+        ;
+      uint8_t pin = Serial.readStringUntil('\n').toInt();
+
+      pinMode(pin, OUTPUT);
       digitalWrite(pin, state);
     }
   }

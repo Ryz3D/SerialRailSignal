@@ -21,6 +21,7 @@ public:
     void internalSet(uint8_t signal) override;
     void internalLoop() override;
 
+    int8_t p_kl = -1;
     int8_t p_hp0_0 = -1, p_hp0_1 = -1;
     int8_t p_hp1 = -1;
     int8_t p_hp2 = -1;

@@ -55,5 +55,8 @@ void Signal::internalLoop() {}
 void Signal::writePin(int8_t pin, bool state)
 {
     if (pin >= 0)
+    {
+        pinMode(pin, OUTPUT);
         digitalWrite(pin, state);
+    }
 }
