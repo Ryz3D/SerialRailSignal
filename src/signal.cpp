@@ -13,14 +13,14 @@ void Signal::setup()
 
 void Signal::set(uint8_t value, bool tele)
 {
+    if (tele)
+        value = transformSignal(value);
+
     last_value = value;
     blink_state = 1;
     last_blink = millis();
     internalSet(OFF);
-    if (tele)
-        internalSetTele(value);
-    else
-        internalSet(value);
+    internalSet(value);
 
 #if SIGNAL_DEBUG == 1
     Serial.print("DEBUG: ");
@@ -58,9 +58,9 @@ void Signal::internalSet(uint8_t signal)
     Serial.println("Signal:::set not implemented!");
 }
 
-void Signal::internalSetTele(uint8_t signal)
+uint8_t Signal::transformSignal(uint8_t signal)
 {
-    internalSet(signal);
+    return signal;
 }
 
 void Signal::internalLoop() {}

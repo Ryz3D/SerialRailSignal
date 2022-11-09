@@ -43,22 +43,18 @@ void Vr::internalSet(uint8_t signal)
     }
 }
 
-void Vr::internalSetTele(uint8_t signal)
+uint8_t Vr::transformSignal(uint8_t signal)
 {
     switch (signal)
     {
     case 0x60:
-        internalSet(VR0);
-        break;
+        return VR0;
     case 0x18:
-        internalSet(VR1);
-        break;
+        return VR1;
     case 0x30:
-        internalSet(VR2);
-        break;
+        return VR2;
     default:
-        internalSet(OFF);
-        break;
+        return signal;
     }
 }
 

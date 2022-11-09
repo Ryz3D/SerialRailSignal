@@ -74,35 +74,27 @@ void Hp::internalSet(uint8_t signal)
     }
 }
 
-void Hp::internalSetTele(uint8_t signal)
+uint8_t Hp::transformSignal(uint8_t signal)
 {
     switch (signal)
     {
     case 0x00:
-        internalSet(KL);
-        break;
+        return KL;
     case 0x03:
     case 0x83:
-        internalSet(HP0);
-        break;
+        return HP0;
     case 0x08:
-        internalSet(HP1);
-        break;
+        return HP1;
     case 0x0C:
-        internalSet(HP2);
-        break;
+        return HP2;
     case 0x22:
-        internalSet(SH1);
-        break;
+        return SH1;
     case 0x13:
-        internalSet(ZS1);
-        break;
+        return ZS1;
     case 0x43:
-        internalSet(ZS8);
-        break;
+        return ZS8;
     default:
-        internalSet(signal);
-        break;
+        return signal;
     }
 }
 

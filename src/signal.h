@@ -24,7 +24,7 @@ public:
 protected:
     virtual void internalSetup();
     virtual void internalSet(uint8_t signal);
-    virtual void internalSetTele(uint8_t signal);
+    virtual uint8_t transformSignal(uint8_t signal);
     virtual void internalLoop();
 
     void writePin(int8_t pin, bool state);
