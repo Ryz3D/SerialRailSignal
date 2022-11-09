@@ -11,13 +11,16 @@ void Signal::setup()
     internalSetup();
 }
 
-void Signal::set(uint8_t value)
+void Signal::set(uint8_t value, bool tele)
 {
     last_value = value;
     blink_state = 1;
     last_blink = millis();
     internalSet(OFF);
-    internalSet(value);
+    if (tele)
+        internalSetTele(value);
+    else
+        internalSet(value);
 
 #if SIGNAL_DEBUG == 1
     Serial.print("DEBUG: ");
@@ -43,11 +46,21 @@ char Signal::teleType()
     return 'S';
 }
 
+const char *Signal::signalType()
+{
+    return "?";
+}
+
 void Signal::internalSetup() {}
 
 void Signal::internalSet(uint8_t signal)
 {
     Serial.println("Signal:::set not implemented!");
+}
+
+void Signal::internalSetTele(uint8_t signal)
+{
+    internalSet(signal);
 }
 
 void Signal::internalLoop() {}
