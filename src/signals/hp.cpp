@@ -10,9 +10,28 @@ const char *Hp::signalType()
     return "Hp";
 }
 
-void Hp::internalSetup()
+uint8_t Hp::fromTeleValue(uint8_t signal)
 {
-    set(HP0);
+    switch (signal)
+    {
+    case 0x00:
+        return KL;
+    case 0x03:
+    case 0x83:
+        return HP0;
+    case 0x08:
+        return HP1;
+    case 0x0C:
+        return HP2;
+    case 0x22:
+        return SH1;
+    case 0x13:
+        return ZS1;
+    case 0x43:
+        return ZS8;
+    default:
+        return OFF;
+    }
 }
 
 void Hp::internalSet(uint8_t signal)
@@ -71,30 +90,6 @@ void Hp::internalSet(uint8_t signal)
         break;
     default:
         break;
-    }
-}
-
-uint8_t Hp::transformSignal(uint8_t signal)
-{
-    switch (signal)
-    {
-    case 0x00:
-        return KL;
-    case 0x03:
-    case 0x83:
-        return HP0;
-    case 0x08:
-        return HP1;
-    case 0x0C:
-        return HP2;
-    case 0x22:
-        return SH1;
-    case 0x13:
-        return ZS1;
-    case 0x43:
-        return ZS8;
-    default:
-        return signal;
     }
 }
 

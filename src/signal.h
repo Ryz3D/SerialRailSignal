@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Arduino.h>
-#include "settings.h"
 
 #define ON 254
 #define OFF 255
@@ -12,8 +11,9 @@ public:
     Signal(uint8_t channel, uint16_t dcc_address);
 
     void setup();
-    void set(uint8_t signal, bool tele = false);
+    void set(uint8_t signal);
     void loop();
+    virtual uint8_t fromTeleValue(uint8_t signal);
     virtual char teleType();
     virtual const char *signalType();
 
@@ -22,9 +22,7 @@ public:
     uint8_t last_value = OFF;
 
 protected:
-    virtual void internalSetup();
     virtual void internalSet(uint8_t signal);
-    virtual uint8_t transformSignal(uint8_t signal);
     virtual void internalLoop();
 
     void writePin(int8_t pin, bool state);

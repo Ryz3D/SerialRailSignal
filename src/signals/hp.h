@@ -18,9 +18,8 @@ public:
 
     char teleType() override;
     const char *signalType() override;
-    void internalSetup() override;
+    uint8_t fromTeleValue(uint8_t signal) override;
     void internalSet(uint8_t signal) override;
-    uint8_t transformSignal(uint8_t signal) override;
     void internalLoop() override;
 
     int8_t p_kl = -1;

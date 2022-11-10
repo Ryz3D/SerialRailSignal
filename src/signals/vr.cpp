@@ -10,9 +10,19 @@ const char *Vr::signalType()
     return "Vr";
 }
 
-void Vr::internalSetup()
+uint8_t Vr::fromTeleValue(uint8_t signal)
 {
-    set(VR0);
+    switch (signal)
+    {
+    case 0x60:
+        return VR0;
+    case 0x18:
+        return VR1;
+    case 0x30:
+        return VR2;
+    default:
+        return OFF;
+    }
 }
 
 void Vr::internalSet(uint8_t signal)
@@ -40,21 +50,6 @@ void Vr::internalSet(uint8_t signal)
         break;
     default:
         break;
-    }
-}
-
-uint8_t Vr::transformSignal(uint8_t signal)
-{
-    switch (signal)
-    {
-    case 0x60:
-        return VR0;
-    case 0x18:
-        return VR1;
-    case 0x30:
-        return VR2;
-    default:
-        return signal;
     }
 }
 

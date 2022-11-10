@@ -1,6 +1,8 @@
-// 'X' 'S' 00 channel 0xFFFF data 'Y'
-// 'X' 'D' 0xFFFF id 0xFF data 'Y'
-// 'p' 0/1 state 255 pin
+// Telegram 'X' 'S' 00 [kanal] 0xFFFF [wert] 'Y'
+// DCC      'X' 'D' 0xFFFF [id] 0xFF [wert] 'Y'
+// Pin      'p' 0/1 [wert] 00 [pin]
+
+// https://wokwi.com/projects/337267688980087380
 
 // DCC -> Serial Addr
 //  0...2000 Signal Addresse
@@ -117,7 +119,7 @@ void setSignal(uint8_t *buffer)
     {
       if (signals[i]->channel == address &&
           signals[i]->teleType() == buffer[0])
-        signals[i]->set(value, true);
+        signals[i]->set(signals[i]->fromTeleValue(value));
     }
   }
 }

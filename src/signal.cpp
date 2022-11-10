@@ -8,27 +8,23 @@ Signal::Signal(uint8_t channel, uint16_t dcc_address)
 
 void Signal::setup()
 {
-    internalSetup();
+    internalSet(0);
 }
 
-void Signal::set(uint8_t value, bool tele)
+void Signal::set(uint8_t value)
 {
-    if (tele)
-        value = transformSignal(value);
-
     last_value = value;
     blink_state = 1;
     last_blink = millis();
     internalSet(OFF);
     internalSet(value);
 
-#if SIGNAL_DEBUG == 1
-    Serial.print("DEBUG: ");
+    Serial.print(signalType());
+    Serial.print(" (");
     Serial.print(dcc_address);
-    Serial.print(" set to ");
+    Serial.print(") set to ");
     Serial.print(value);
     Serial.println();
-#endif
 }
 
 void Signal::loop()
@@ -51,14 +47,12 @@ const char *Signal::signalType()
     return "?";
 }
 
-void Signal::internalSetup() {}
-
 void Signal::internalSet(uint8_t signal)
 {
-    Serial.println("Signal:::set not implemented!");
+    Serial.println("Signal::internalSet not implemented!");
 }
 
-uint8_t Signal::transformSignal(uint8_t signal)
+uint8_t Signal::fromTeleValue(uint8_t signal)
 {
     return signal;
 }
