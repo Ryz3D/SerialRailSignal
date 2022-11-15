@@ -22,7 +22,7 @@
 #include "signals/hp.h"
 #include "signals/vr.h"
 
-#include "devices/nano5.h"
+#include "devices/nano9.h"
 
 uint8_t signals_len = sizeof(signals) / sizeof(Signal *);
 

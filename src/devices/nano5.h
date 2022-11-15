@@ -10,7 +10,7 @@ void setupSignals()
     vC->p_vr1_r = 12;
     vC->p_vr0_l = 3;
     vC->p_vr0_r = 6;
-    // vC->p_kl = 9;
+    vC->p_kl = 9;
 }
 
 Signal *signals[] = {vC};

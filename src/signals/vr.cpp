@@ -2,7 +2,7 @@
 
 char Vr::teleType()
 {
-    return 'V';
+    return 'S';
 }
 
 const char *Vr::signalType()
@@ -30,19 +30,23 @@ void Vr::internalSet(uint8_t signal)
     switch (signal)
     {
     case VR0:
+        writePin(p_kl, 1);
         writePin(p_vr0_l, 1);
         writePin(p_vr0_r, 1);
         break;
     case VR1:
+        writePin(p_kl, 1);
         writePin(p_vr1_l, 1);
         writePin(p_vr1_r, 1);
         break;
     case VR2:
+        writePin(p_kl, 1);
         writePin(p_vr0_l, 1);
         writePin(p_vr1_r, 1);
         break;
     case ON:
     case OFF:
+        writePin(p_kl, signal == ON);
         writePin(p_vr0_l, signal == ON);
         writePin(p_vr0_r, signal == ON);
         writePin(p_vr1_l, signal == ON);
